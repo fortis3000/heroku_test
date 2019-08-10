@@ -13,7 +13,7 @@ import random
 #import self libs
 import test.test_get_message as t_gm
 from models import main as models_main
-from number import number_calc
+
 
 import logging
 import timber
@@ -91,14 +91,14 @@ def get_message():
         #make test models predict (for message , model_id = 0)
         #model_resp = t_gm.make_random_model(json_params = json_params , model_id = 0, model_to = 'message_id')
         #response['models'].append(model_resp)
-
+        
         #make real emoji predict for message
         status_code = 500
         response['models'] = models_main.main(json_params = json_params , model_to = 'message_id')
         log(logger,json_params,'model done',internal_id)
-
+        
         status_code = 200
-
+        
         
     except:
         if status_code == 200:
@@ -112,36 +112,7 @@ def get_message():
     response = json.dumps(response)
     print(response)
     return str(response)  , status_code
-
-
-# get message from messanger and calc messages models
-@application.route('/sadiakhmatov_best', methods=['GET', 'POST'])
-def sadiakhmatov_best():
-    internal_id = randomString(10)
-    status_code = 200
-
-    response = {'sadiakhmatov_best_result': None}
-
-    try:
-        log(logger, step='new', internal_id=internal_id)
-        getData = request.get_data()
-        json_params = json.loads(getData)
-        log(logger, json_params, 'get json_params', internal_id)
-
-        status_code = 400
-        response['sadiakhmatov_best_result'] = number_calc(json_params['number'])
-
-    except:
-        if status_code == 200:
-            status_code = 500
-        traceback.print_exc()
-        response['status'] = 'error'
-        response['code'] = 501
-        log(logger, json_params, 'some error', internal_id)
-
-    response = json.dumps(response)
-    print(response)
-    return str(response), status_code
+        
 
 
 if __name__ == "__main__":
