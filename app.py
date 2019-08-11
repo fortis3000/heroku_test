@@ -117,6 +117,7 @@ def get_message():
 @application.route('/sadiakhmatov_best', methods=['GET'])
 def get_mult():
     internal_id = randomString(10)
+    status_code = 200
 
     response = {'number': None}
 
