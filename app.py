@@ -23,6 +23,7 @@ log_apikey = os.getenv('timber_apikey')
 logger = logging.getLogger(__name__)
 
 timber_handler = timber.TimberHandler(source_id='14767', api_key=log_apikey)
+timber_handler.setLevel(logging.DEBUG)
 logger.addHandler(timber_handler)
 
 
