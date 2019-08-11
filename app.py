@@ -32,8 +32,7 @@ application = Flask(__name__)  # Change assignment here
 
 #define loger func
 def log(logger, json_params=None,step='new',internal_id=None):
-    logger.info("Logs: step: {0}, internal_id: {1}".format(step, internal_id),
-                extra={'all_params: ': json.dumps(json_params)})
+    logger.info("Logs: step: {0}, params: {1}".format(step, json.dumps(json_params)))
 
 
 #create random string
