@@ -1,5 +1,6 @@
 import re
 
+
 def neg_letter(string):
     """ Возвращает значение, содержатся ли сочетания минуса и буквы
      или двух минусов в строке"""
@@ -8,13 +9,15 @@ def neg_letter(string):
         return True
 
     for substring in string.split('-'):
-        try:
-            # первое число отрицательное
-            if (len(substring)) == 0:
-                continue
+        # первое число отрицательное
+        if (len(substring)) == 0:
+            continue
 
+        try:
+            int(substring[0])
         except ValueError:
             return True
+
     return False
 
 
@@ -24,14 +27,14 @@ def number_calc(string):
     if neg_letter(string):
         return 'Недопустимое сочетание'
 
-    string = re.sub('[^-\d]','', string)
+    string = re.sub('[^-\d]', '', string)
 
     if len(string.split('-')) % 2 == 0:
         answer_sign = -1
     else:
         answer_sign = 1
 
-    string = re.sub('[^\d]','', string)
+    string = re.sub('[^\d]', '', string)
 
     int_list = [int(x) for x in string]
 
@@ -39,4 +42,4 @@ def number_calc(string):
     for i in int_list[1:]:
         mult *= i
 
-    return mult*answer_sign
+    return mult * answer_sign
