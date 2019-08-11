@@ -29,8 +29,6 @@ logger.addHandler(timber_handler)
 application = Flask(__name__)  # Change assignment here
 
 
-
-
 #define loger func
 def log(logger, json_params=None,step='new',internal_id=None):
     if json_params is None:
@@ -67,18 +65,18 @@ def get_message():
                 'models' :[]
                }
     try:
-        # log(logger,step='new',internal_id=internal_id)
-        # getData = request.get_data()
-        # json_params = json.loads(getData)
-        # log(logger,json_params,'get json_params',internal_id)
+        log(logger,step='new',internal_id=internal_id)
+        getData = request.get_data()
+        json_params = json.loads(getData)
+        log(logger,json_params,'get json_params',internal_id)
 
-        json_params = {'message_id':0,
-                       'dialog_id':0,
-                       'participants_id':0,
-                       'user_id':0,
-                       'content':'test content',
-                       'created_at':111111111,
-                   }
+        # json_params = {'message_id':0,
+        #                'dialog_id':0,
+        #                'participants_id':0,
+        #                'user_id':0,
+        #                'content':'test content',
+        #                'created_at':111111111,
+        #            }
 
 
         status_code = 400
@@ -122,18 +120,17 @@ def get_mult():
     response = {'number': None}
 
     try:
-        log(logger,step='new',internal_id=internal_id)
+        log(logger, json_params=None, step='New', internal_id=internal_id)
         getData = request.get_data()
         json_params = json.loads(getData)
-        log(logger,json_params,'get json_params',internal_id)
+        log(logger, json_params=None, step='get json number', internal_id=internal_id)
 
         # local
-        # json_params = {'number': '123',
-        #                }
+        # json_params = {'number': '123'}
 
 
         response['number'] = number_calc(json_params['number'])
-        log(logger, json_params, 'model done', internal_id)
+        log(logger, json_params=None, step='mult done', internal_id=internal_id)
 
         status_code = 200
 
@@ -144,7 +141,7 @@ def get_mult():
         traceback.print_exc()
         response['status'] = 'error'
         response['code'] = 501
-        log(logger, json_params, 'some error', internal_id)
+        log(logger, json_params=None, step='some error', internal_id=internal_id)
 
     response = json.dumps(response)
     print(response)
