@@ -116,26 +116,23 @@ def get_message():
 # get number and multiplying
 @application.route('/sadiakhmatov_best', methods=['GET'])
 def get_mult():
+    internal_id = randomString(10)
 
     response = {'number': None}
+
     try:
-        # log(logger,step='new',internal_id=internal_id)
-        # getData = request.get_data()
-        # json_params = json.loads(getData)
-        # log(logger,json_params,'get json_params',internal_id)
+        log(logger,step='new',internal_id=internal_id)
+        getData = request.get_data()
+        json_params = json.loads(getData)
+        log(logger,json_params,'get json_params',internal_id)
 
-        json_params = {'number': '123',
-                       }
-
-        # status_code = 400
-        # response['number'] = json_params['message_id']
-        # response['dialog_id'] = json_params['dialog_id']
-        # response['participants_id'] = json_params['participants_id']
-        # response['user_id'] = json_params['user_id']
+        # local
+        # json_params = {'number': '123',
+        #                }
 
 
         response['number'] = number_calc(json_params['number'])
-        # log(logger, json_params, 'model done', internal_id)
+        log(logger, json_params, 'model done', internal_id)
 
         status_code = 200
 
@@ -146,7 +143,7 @@ def get_mult():
         traceback.print_exc()
         response['status'] = 'error'
         response['code'] = 501
-        # log(logger, json_params, 'some error', internal_id)
+        log(logger, json_params, 'some error', internal_id)
 
     response = json.dumps(response)
     print(response)

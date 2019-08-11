@@ -6,13 +6,13 @@ def main(json_params = None , model_to = 'message_id'):
 
         models_resp = []
 
-        json_params = {'message_id':0,
-                       'dialog_id':0,
-                       'participants_id':0,
-                       'user_id':0,
-                       'content':'test content',
-                       'created_at':111111111,
-                   }
+        # json_params = {'message_id':0,
+        #                'dialog_id':0,
+        #                'participants_id':0,
+        #                'user_id':0,
+        #                'content':'test content',
+        #                'created_at':111111111,
+        #            }
 
         content = json_params['content']
         to_id = json_params[model_to]
