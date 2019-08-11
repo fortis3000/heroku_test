@@ -1,23 +1,12 @@
 import re
 
-
 def neg_letter(string):
     """ Возвращает значение, содержатся ли сочетания минуса и буквы
      или двух минусов в строке"""
 
-    if len(string.split('--')) > 1:
+    if (re.search('-[\D]', string) is not None) | \
+       (re.search('--', string) is not None):
         return True
-
-    for substring in string.split('-'):
-        # первое число отрицательное
-        if (len(substring)) == 0:
-            continue
-
-        try:
-            int(substring[0])
-        except ValueError:
-            return True
-
     return False
 
 
@@ -25,16 +14,16 @@ def number_calc(string):
     """Перемножает целые значения в строке с учетом отрицательных"""
 
     if neg_letter(string):
-        return 'Недопустимое сочетание'
+        return "Incorrect input"
 
-    string = re.sub('[^-\d]', '', string)
+    string = re.sub('[^-\d]','', string)
 
     if len(string.split('-')) % 2 == 0:
         answer_sign = -1
     else:
         answer_sign = 1
 
-    string = re.sub('[^\d]', '', string)
+    string = re.sub('[^\d]','', string)
 
     int_list = [int(x) for x in string]
 
@@ -42,4 +31,4 @@ def number_calc(string):
     for i in int_list[1:]:
         mult *= i
 
-    return mult * answer_sign
+    return mult*answer_sign

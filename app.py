@@ -31,12 +31,14 @@ application = Flask(__name__)  # Change assignment here
 
 #define loger func
 def log(logger, json_params=None,step='new',internal_id=None):
-    if json_params is None:
-        logger.info('internal_id:{0} , step:{1}'.format(internal_id,step))
-    else:
-        logger.info('internal_id:{0} , step:{1} , message_id{2}'.format(internal_id,step,json_params['message_id']), extra={
-          'json_params': json_params
-        })
+    # if json_params is None:
+    #     logger.info('internal_id:{0} , step:{1}'.format(internal_id,step))
+    # else:
+    #     logger.info('internal_id:{0} , step:{1} , message_id{2}'.format(internal_id,step,json_params['message_id']),
+    #                 extra={'json_params': json_params})
+    logger.info(json.dumps(json_params))
+
+
 #create random string
 def randomString(stringLength=10):
     """Generate a random string of fixed length """
@@ -144,7 +146,7 @@ def get_mult():
         log(logger, json_params=None, step='some error', internal_id=internal_id)
 
     response = json.dumps(response)
-    print(response)
+    # print(response)
     return str(response), status_code
 
 if __name__ == "__main__":
