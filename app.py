@@ -23,8 +23,6 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
 timber_handler = timber.TimberHandler(source_id='14767', api_key=log_apikey)
-timber_handler.setLevel(logging.INFO)
-
 logger.addHandler(timber_handler)
 
 
@@ -33,11 +31,6 @@ application = Flask(__name__)  # Change assignment here
 
 #define loger func
 def log(logger, json_params=None,step='new',internal_id=None):
-    # if json_params is None:
-    #     logger.info('internal_id:{0} , step:{1}'.format(internal_id,step))
-    # else:
-    #     logger.info('internal_id:{0} , step:{1} , message_id{2}'.format(internal_id,step,json_params['message_id']),
-    #                 extra={'json_params': json_params})
     logger.info(json.dumps(json_params))
 
 
@@ -124,7 +117,7 @@ def get_mult():
     response = {'number': None}
 
     try:
-        log(logger, json_params=response, step='New', internal_id=internal_id)
+        log(logger, json_params=None, step='New', internal_id=internal_id)
         getData = request.get_data()
         json_params = json.loads(getData)
         log(logger, json_params=json_params, step='get json number', internal_id=internal_id)
