@@ -18,7 +18,7 @@ def neg_letter(string):
     return False
 
 
-def number_cals(string):
+def number_calc(string):
     """Перемножает целые значения в строке с учетом отрицательных"""
 
     if neg_letter(string):
@@ -40,6 +40,3 @@ def number_cals(string):
         mult *= i
 
     return mult*answer_sign
-
-a = input()
-print(number_cals(a))
