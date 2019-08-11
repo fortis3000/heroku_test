@@ -6,4 +6,4 @@ def number_calc(string_number):
             mult *= i
         return mult
     except:
-        return ValueError('В строке пристутствует не число')
+        return str(ValueError('В строке пристутствует не число'))
