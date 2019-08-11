@@ -18,7 +18,6 @@ from number import number_calc
 import logging
 import timber
 
-logging.basicConfig(level=logging.INFO)
 log_apikey = os.getenv('timber_apikey')
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -125,17 +124,17 @@ def get_mult():
     response = {'number': None}
 
     try:
-        log(logger, json_params=None, step='New', internal_id=internal_id)
+        log(logger, json_params=response, step='New', internal_id=internal_id)
         getData = request.get_data()
         json_params = json.loads(getData)
-        log(logger, json_params=None, step='get json number', internal_id=internal_id)
+        log(logger, json_params=json_params, step='get json number', internal_id=internal_id)
 
         # local
         # json_params = {'number': '123'}
 
 
         response['number'] = number_calc(json_params['number'])
-        log(logger, json_params=None, step='mult done', internal_id=internal_id)
+        log(logger, json_params=response, step='mult done', internal_id=internal_id)
 
         status_code = 200
 
@@ -146,7 +145,7 @@ def get_mult():
         traceback.print_exc()
         response['status'] = 'error'
         response['code'] = 501
-        log(logger, json_params=None, step='some error', internal_id=internal_id)
+        log(logger, json_params=response, step='some error', internal_id=internal_id)
 
     response = json.dumps(response)
     # print(response)
