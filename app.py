@@ -13,7 +13,7 @@ import random
 #import self libs
 import test.test_get_message as t_gm
 from models import main as models_main
-
+from number import number_calc
 
 import logging
 import timber
@@ -67,18 +67,18 @@ def get_message():
                 'models' :[]
                }
     try:
-        log(logger,step='new',internal_id=internal_id)
-        getData = request.get_data()
-        json_params = json.loads(getData) 
-        log(logger,json_params,'get json_params',internal_id)
+        # log(logger,step='new',internal_id=internal_id)
+        # getData = request.get_data()
+        # json_params = json.loads(getData)
+        # log(logger,json_params,'get json_params',internal_id)
 
-        #json_params = {'message_id':0,
-        #                'dialog_id':0,
-        #                'participants_id':0,
-        #                'user_id':0,
-        #                'content':'test content',
-        #                'created_at':111111111,
-        #            }
+        json_params = {'message_id':0,
+                       'dialog_id':0,
+                       'participants_id':0,
+                       'user_id':0,
+                       'content':'test content',
+                       'created_at':111111111,
+                   }
 
 
         status_code = 400
@@ -112,8 +112,42 @@ def get_message():
     response = json.dumps(response)
     print(response)
     return str(response)  , status_code
-        
 
+# get number and multiplying
+@application.route('/sadiakhmatov_best', methods=['GET'])
+def get_mult():
+    internal_id = randomString(10)
+
+    response = {'number': None}
+
+    try:
+        log(logger,step='new',internal_id=internal_id)
+        getData = request.get_data()
+        json_params = json.loads(getData)
+        log(logger,json_params,'get json_params',internal_id)
+
+        # local
+        # json_params = {'number': '123',
+        #                }
+
+
+        response['number'] = number_calc(json_params['number'])
+        log(logger, json_params, 'model done', internal_id)
+
+        status_code = 200
+
+
+    except:
+        if status_code == 200:
+            status_code = 500
+        traceback.print_exc()
+        response['status'] = 'error'
+        response['code'] = 501
+        log(logger, json_params, 'some error', internal_id)
+
+    response = json.dumps(response)
+    print(response)
+    return str(response), status_code
 
 if __name__ == "__main__":
     #heroku
