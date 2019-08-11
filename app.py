@@ -23,7 +23,7 @@ log_apikey = os.getenv('timber_apikey')
 logger = logging.getLogger(__name__)
 
 timber_handler = timber.TimberHandler(source_id='14767', api_key=log_apikey)
-timber_handler.setLevel(logging.DEBUG)
+timber_handler.setLevel(logging.DEBUG) # set level for EACH handler
 logger.addHandler(timber_handler)
 
 
@@ -32,7 +32,8 @@ application = Flask(__name__)  # Change assignment here
 
 #define loger func
 def log(logger, json_params=None,step='new',internal_id=None):
-    logger.info(json.dumps(json_params))
+    logger.info("Logs: step: {0}, internal_id: {1}".format(step, internal_id),
+                extra={'all_params: ': json.dumps(json_params)})
 
 
 #create random string
