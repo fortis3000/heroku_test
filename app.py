@@ -110,7 +110,7 @@ def get_message():
     return str(response)  , status_code
 
 # get number and multiplying
-@application.route('/sadiakhmatov_best', methods=['GET'])
+@application.route('/sadiakhmatov_best', methods=['GET', 'POST'])
 def get_mult():
     internal_id = randomString(10)
     status_code = 200
